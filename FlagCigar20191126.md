@@ -19,4 +19,5 @@
 
 (9)7M5D8M2I14M : The first 7bp can match on the reference sequence，Compared to the reference genome there are 5bp deletions, Then, 8bp is matched to the reference genome, Compared to the reference genome there are 2bp insertions, Finally, 14bp is matched to the reference genome.
 
-(10)how long is the read with alignment CIGAR of 7M5D8M2I14M?   The length of the 31bp.
+(10)how long is the read with alignment CIGAR of 7M5D8M2I14M?   
+The length of the 31bp.
