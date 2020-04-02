@@ -1,0 +1,36 @@
+下载小麦三个品种的pep蛋白数据和注释文件数据gff格式
+安装jcvi：conda install -c bioconda -y jcvi  (2)pip install jcvi
+应该还需要其他软件，我应该先前安装过，后期补充，以便换个工作环境也能上手
+
+
+##把gff转bed文件,分析只需要用到每个基因最长的转录本就行
+python -m jcvi.formats.gff bed --type=mRNA --key=ID Aegilops_tauschii.Aet_v4.0.46.chr.gff3.gz -o Aeg.bed
+error:ModuleNotFoundError: No module named 'Bio'
+解决：pip install biopython
+python -m jcvi.formats.gff bed --type=mRNA --key=ID Aegilops_tauschii.Aet_v4.0.46.chr.gff3.gz -o Aeg.bed
+运行：11:27:10 [base] Load file `Aegilops_tauschii.Aet_v4.0.46.chr.gff3.gz`
+11:29:10 [gff] Extracted 256566 features (type=mRNA id=ID)
+python -m jcvi.formats.gff bed --type=mRNA --key=transcript_id Aegilops_tauschii.Aet_v4.0.46.chr.gff3.gz -o Aegilops_tauschii.bed
+##这样能把第4列的transcript:去掉
+依次把另外两个gff文件转成bed格式
+python -m jcvi.formats.gff bed --type=mRNA --key=transcript_id Triticum_dicoccoides.WEWSeq_v.1.0.46.gff3.gz -o Triticum_dicoccoides.bed
+报错：EOFError: Compressed file ended before the end-of-stream marker was reached  文件下载不完整
+python -m jcvi.formats.gff bed --type=mRNA --key=transcript_id Triticum_turgidum.Svevo.v1.46.gff3.gz -o Triticum_turgidum.bed
+
+（然后将bed去重复
+python2 -m jcvi.formats.bed uniq Aegilops_tauschii.bed
+python2 -m jcvi.formats.bed uniq Triticum_turgidum.bed）这一步我没有运行，我看其他人的步骤有这步
+
+##cds解压后需要去掉|分隔符b并要修改id 以基因而不是转录本命名
+python -m jcvi.formats.fasta format --sep="|" Aegilops_tauschii.Aet_v4.0.cds.all.fa.gz Aegilops_tauschii.cds
+python -m jcvi.formats.fasta format --sep="|" Triticum_dicoccoides.WEWSeq_v.1.0.cds.all.fa.gz Triticum_dicoccoides.cds
+python -m jcvi.formats.fasta format --sep="|" Triticum_turgidum.Svevo.v1.cds.all.fa.gz Triticum_turgidum.cds
+
+
+不完整的文件下载完成，接着运行
+python -m jcvi.formats.gff bed --type=mRNA --key=transcript_id Triticum_dicoccoides.WEWSeq_v.1.0.46.gff3.gz -o Triticum_dicoccoides.bed
+##开始共线性分析
+python -m jcvi.compara.catalog ortholog Triticum_dicoccoides Triticum_turgidum
+报错：RuntimeError: Failed to process string with tex because latex could not be found
+解决： pip install latex或 sudo apt-get install -y texlive texlive-latex-extra texlive-latex-recommended
+
