@@ -32,5 +32,9 @@ python -m jcvi.formats.gff bed --type=mRNA --key=transcript_id Triticum_dicoccoi
 ##开始共线性分析
 python -m jcvi.compara.catalog ortholog Triticum_dicoccoides Triticum_turgidum
 报错：RuntimeError: Failed to process string with tex because latex could not be found
-解决： pip install latex或 sudo apt-get install -y texlive texlive-latex-extra texlive-latex-recommended
+解决： pip install latex或 sudo apt-get install -y texlive texlive-latex-extra texlive-latex-recommende
 
+安装完成之后再次运行python -m jcvi.compara.catalog ortholog Triticum_dicoccoides Triticum_turgidum
+无反应，说明运行完成
+接着做Triticum_dicoccoides Aegilops_tauschii的共线性分析
+python -m jcvi.compara.catalog ortholog Triticum_dicoccoides Aegilops_tauschii 
