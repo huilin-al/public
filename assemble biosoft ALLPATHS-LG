@@ -1,0 +1,8 @@
+### 下载gmp
+sudo apt-get install lzip
+  lzip -d gmp-5.1.1.tar.lz
+  tar xvf gmp-5.1.1.tar
+  cd gmp-5.1..1
+  ./configure
+  make
+  sudo make install
