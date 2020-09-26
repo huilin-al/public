@@ -1,0 +1,22 @@
+### 下载gmp
+sudo apt-get install lzip
+  lzip -d gmp-5.1.1.tar.lz
+  tar xvf gmp-5.1.1.tar
+  cd gmp-5.1..1
+  ./configure
+  make
+  sudo make install
+  
+###mpfr,下载安装包
+  tar xvf gmp-5.1.1.tar
+   cd mpfr-4.1.0/
+   ./configure
+   make
+   sudo make install
+   export PATH=/home/huilin_hu/biosoft/mpfr-4.1.0:$PATH
+###ALLPATHS-L###ALLPATHS-LG
+   tar zxvf LATEST_VERSION.tar.gz 
+  ./configure --prefix=/home/huilin_hu/biosoft/assemble/allpathslg-52488
+  error:./paths/long/Logging.h:231:1: error: ambiguous overload for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘__pid_t’ {aka ‘int’})
+  231 | LoggingBool( KEEP_LOCS, False,
+  ###编译错误
